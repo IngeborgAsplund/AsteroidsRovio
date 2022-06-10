@@ -52,6 +52,11 @@ public class GameBoard : MonoBehaviour
     {
         currentLives = Maxlives;
     }
+
+    public void DecreaseALife() 
+    {
+
+    }
       
     public void SpawnPlayer() 
     {
