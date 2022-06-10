@@ -38,5 +38,7 @@ public class GameManager : MonoBehaviour
     {
         Score.ClearScore();
         Debug.Log("started");
+        Board.SetStartingLives();
+        Board.SpawnPlayer();
     }
 }

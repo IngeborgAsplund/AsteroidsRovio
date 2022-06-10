@@ -7,8 +7,6 @@ public class GamePlayActor : MonoBehaviour
     [SerializeField]
     protected float speed;
     [SerializeField]
-    protected float velocity;
-    [SerializeField]
     protected float radius;
     
     public virtual void Destruction() 

@@ -24,6 +24,7 @@ public class GUI : MonoBehaviour
     }
     public void UpdateLivesLabel(int lives) 
     {
+        livesText.text = lives.ToString();
     }
     public void UpdateScoreLabel(int score) 
     {
