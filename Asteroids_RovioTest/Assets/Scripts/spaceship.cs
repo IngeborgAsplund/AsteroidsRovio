@@ -6,24 +6,56 @@ public class spaceship : GamePlayActor
 {
     [SerializeField]
     private GameObject bullet;
-   
+    [SerializeField]
+    private float turnspeed;
+    private Rigidbody2D rigidBody;
+    private bool thrusting;
+    private float turnDirection;
+    private void Awake()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
     private void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow)) 
+        thrusting = Input.GetKey(KeyCode.UpArrow);
+
+        if (Input.GetKey(KeyCode.LeftArrow)) 
         {
-            Move();
+            turnDirection = 1.0f;
         }
+        if (Input.GetKey(KeyCode.RightArrow)) 
+        {
+            turnDirection = -1.0f;
+        }
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow)) 
+        {
+            turnDirection = 0.0f;
+        }
+        GameManager.Instance.Board.ObjectCrossedBorder(gameObject);
+    }
+    private void FixedUpdate()
+    {
+        if (thrusting) 
+        {
+            Move();            
+        }
+        if (turnDirection != 0.0f) 
+        {
+            Rotate();
+        }
+        
     }
     private void Fire() 
     {
     }
     private void Move() 
-    {
-        transform.Translate(transform.up *speed*Time.deltaTime);
-        GameManager.Instance.Board.ObjectCrossedBorder(this.gameObject);
+    {       
+        rigidBody.AddForce(this.transform.up * speed);
+        
     }
     private void Rotate() 
     {
+        rigidBody.AddTorque(turnDirection*turnspeed);       
     }
     private void Teleport() 
     {
