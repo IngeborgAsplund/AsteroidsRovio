@@ -71,7 +71,7 @@ public class spaceship : GamePlayActor
     }
     public override void Destruction()
     {
-
+        GameManager.Instance.Board.DecreaseALife();
         base.Destruction();
     }
 }

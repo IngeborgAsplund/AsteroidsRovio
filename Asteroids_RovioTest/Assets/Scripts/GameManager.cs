@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     private GameBoard gameBoard;
     private GUI gameGUI;
     private ScoreObject score;
+    private bool gameOver;
     private void Awake()
     {
         if (Instance == null) 
@@ -34,11 +35,23 @@ public class GameManager : MonoBehaviour
         get { return score; }
         set { score = value; }
     }
+    public bool GameOver 
+    {
+        get { return gameOver; }
+    }
     public void StartGame() 
     {
+        gameOver = false;
         Score.ClearScore();
         Debug.Log("started");
         Board.SetStartingLives();
         Board.SpawnPlayer();
+        Board.AsteroidsInGame.Clear();
+        Board.SpawnAsteroids();
+    }
+    public void EndGame() 
+    {
+        gameOver = true;
+        GameGUI.ShowGameOver();
     }
 }

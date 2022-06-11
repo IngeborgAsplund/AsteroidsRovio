@@ -8,7 +8,14 @@ public class GamePlayActor : MonoBehaviour
     protected float speed;
     [SerializeField]
     protected float radius;
-    
+
+    private void Update()
+    {
+        if (GameManager.Instance.GameOver) 
+        {
+            Destruction();
+        }
+    }
     public virtual void Destruction() 
     {
         Destroy(this.gameObject);
