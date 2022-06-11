@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private GameBoard gameBoard;
     private GUI gameGUI;
     private ScoreObject score;
-    private bool gameOver;
+    private bool gameOver = false;
     private void Awake()
     {
         if (Instance == null) 

@@ -126,6 +126,29 @@ public class GameBoard : MonoBehaviour
     private Vector3 SelectPosition() 
     {
         Vector3 position = new Vector3(Random.Range(leftBorder, rightBorder), Random.Range(lowerEdge, UpperEdge), spawnPoint.transform.position.z);
+        if (player.TransformWithinradius(position)) 
+        {
+            position = new Vector3(Random.Range(leftBorder, rightBorder), Random.Range(lowerEdge, UpperEdge), spawnPoint.transform.position.z);
+            Debug.Log(position);
+        }
+        if (asteroidsInGame.Count > 0) 
+        {
+            for(int i = 0; i < asteroidsInGame.Count; i++) 
+            {
+                if (asteroidsInGame[i].TransformWithinradius(position)) 
+                {
+                    position = new Vector3(Random.Range(leftBorder, rightBorder), Random.Range(lowerEdge, UpperEdge),spawnPoint.transform.position.z);
+                    Debug.Log(position);
+                }
+            }
+        }
         return position;
+    }
+    public void CheckNumberOfAsteroids() 
+    {
+        if (asteroidsInGame.Count < 2&&!GameManager.Instance.GameOver) 
+        {
+            SpawnAsteroids();
+        }
     }
 }

@@ -135,5 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
-  radius: 0.7
+  radius: 0.3
   score: 100
+  size: 2
+  minSize: 0.5

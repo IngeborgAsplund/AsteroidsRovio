@@ -316,11 +316,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3551322217957304243, guid: 9f5c2055a25b8e447a4dcee5fc209c39, type: 3}
-  numberOfAsteroids: 10
+  numberOfAsteroids: 7
   asteroid: {fileID: 2608663212592159029, guid: ad17bdd5afdfd524cba52b8d35003db9, type: 3}
-  trajectoryVariance: 50
   spawnPoint: {fileID: 1835502003}
-  timerValue: 0.2
+  timerValue: 0.1
   rightBorder: 9.21
   leftBorder: -9.19
   upperEdge: 5.11
