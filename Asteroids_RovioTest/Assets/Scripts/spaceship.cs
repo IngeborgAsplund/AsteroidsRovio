@@ -20,25 +20,9 @@ public class spaceship : GamePlayActor
     }
     private void Update()
     {
-        thrusting = Input.GetKey(KeyCode.UpArrow);       
-
-        if (Input.GetKey(KeyCode.LeftArrow)) 
-        {
-            turnDirection = 1.0f;
-        }
-        if (Input.GetKey(KeyCode.RightArrow)) 
-        {
-            turnDirection = -1.0f;
-        }
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow)) 
-        {
-            turnDirection = 0.0f;
-        }
-        if (Input.GetKeyDown(KeyCode.Space)) 
-        {
-            Fire();
-        }
+        TakeInput();
         GameManager.Instance.Board.ObjectCrossedBorder(gameObject);
+        InvulnerabilityTimerCountDown();
     }
     private void FixedUpdate()
     {
@@ -52,8 +36,38 @@ public class spaceship : GamePlayActor
         }
         
     }
+    private void TakeInput() 
+    {
+        if (!GameManager.Instance.GameOver) 
+        {
+            thrusting = Input.GetKey(KeyCode.UpArrow);
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                turnDirection = 1.0f;
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                turnDirection = -1.0f;
+            }
+            if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                turnDirection = 0.0f;
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Fire();
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                Teleport();
+            }
+        }
+        
+    }
     private void Fire() 
-    {        
+    {
+        timeOfInvulnerability = maxTimerValue;
         Projectile newProjectile = Instantiate(bullet, bulletSpawnPoint.transform.position,bulletSpawnPoint.transform.rotation);
         newProjectile.Project(this.transform.up);
     }
@@ -68,10 +82,15 @@ public class spaceship : GamePlayActor
     }
     private void Teleport() 
     {
+        transform.position = GameManager.Instance.Board.TeleportSpawn();
     }
-    public override void Destruction()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameManager.Instance.Board.DecreaseALife();
-        base.Destruction();
+        if (timeOfInvulnerability <= 0) 
+        {
+            GameManager.Instance.Board.DecreaseALife();
+            timeOfInvulnerability = maxTimerValue;
+        }
     }
+
 }

@@ -27,20 +27,8 @@ public class GameBoard : MonoBehaviour
     [SerializeField]
     int Maxlives = 5;
     int currentLives = 0;
-    private float timer;
+    private float timer = .1f;
     
-    public float RightBorder 
-    {
-        get { return rightBorder; } 
-    }
-    public float LeftBorder
-    {
-        get { return leftBorder; }
-    }
-    public float UpperEdge
-    {
-        get { return rightBorder; }
-    }
     public List<Asteroid> AsteroidsInGame 
     {
         get { return asteroidsInGame; }
@@ -66,10 +54,11 @@ public class GameBoard : MonoBehaviour
     public void DecreaseALife() 
     {
         currentLives--;
+        Destroy(GameObject.FindGameObjectWithTag("Player"));
         GameManager.Instance.GameGUI.UpdateLivesLabel(currentLives);
         if (currentLives > 0) 
-        {
-            SpawnPlayer();
+        {           
+            Invoke("SpawnPlayer", 1f);
         }
         else
         {
@@ -125,10 +114,10 @@ public class GameBoard : MonoBehaviour
     }
     private Vector3 SelectPosition() 
     {
-        Vector3 position = new Vector3(Random.Range(leftBorder, rightBorder), Random.Range(lowerEdge, UpperEdge), spawnPoint.transform.position.z);
+        Vector3 position = new Vector3(Random.Range(leftBorder, rightBorder), Random.Range(lowerEdge, upperEdge), spawnPoint.transform.position.z);
         if (player.TransformWithinradius(position)) 
         {
-            position = new Vector3(Random.Range(leftBorder, rightBorder), Random.Range(lowerEdge, UpperEdge), spawnPoint.transform.position.z);
+            position = new Vector3(Random.Range(leftBorder, rightBorder), Random.Range(lowerEdge, upperEdge), spawnPoint.transform.position.z);
             Debug.Log(position);
         }
         if (asteroidsInGame.Count > 0) 
@@ -137,7 +126,7 @@ public class GameBoard : MonoBehaviour
             {
                 if (asteroidsInGame[i].TransformWithinradius(position)) 
                 {
-                    position = new Vector3(Random.Range(leftBorder, rightBorder), Random.Range(lowerEdge, UpperEdge),spawnPoint.transform.position.z);
+                    position = new Vector3(Random.Range(leftBorder, rightBorder), Random.Range(lowerEdge, upperEdge),spawnPoint.transform.position.z);
                     Debug.Log(position);
                 }
             }
@@ -150,5 +139,19 @@ public class GameBoard : MonoBehaviour
         {
             SpawnAsteroids();
         }
+    }
+    public void ClearGameBoard() 
+    {
+        for(int i = 0; i <asteroidsInGame.Count; i++) 
+        {
+            Destroy(asteroidsInGame[i].gameObject);
+        }
+        asteroidsInGame.Clear();
+    }
+    public Vector3 TeleportSpawn() 
+    {
+        float randomX = Random.Range(leftBorder, rightBorder);
+        float randomY = Random.Range(lowerEdge, upperEdge);
+        return new Vector3(randomX, randomY, spawnPoint.position.z);
     }
 }

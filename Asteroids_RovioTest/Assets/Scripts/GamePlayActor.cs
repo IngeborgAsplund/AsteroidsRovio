@@ -5,15 +5,25 @@ using UnityEngine;
 public class GamePlayActor : MonoBehaviour
 {
     [SerializeField]
-    protected float speed;
+    protected float speed = 10;
     [SerializeField]
-    protected float radius;
-
-    private void Update()
+    protected float radius = 1;
+    [SerializeField]
+    protected float maxTimerValue;
+    protected float timeOfInvulnerability = 0.5f;
+    private void Awake()
     {
-        if (GameManager.Instance.GameOver) 
+        timeOfInvulnerability = maxTimerValue;
+    }
+    public void InvulnerabilityTimerCountDown() 
+    {
+        if (timeOfInvulnerability > 0) 
         {
-            Destruction();
+            timeOfInvulnerability -= Time.deltaTime;
+        }
+        else
+        {
+            timeOfInvulnerability = 0;
         }
     }
     public virtual void Destruction() 

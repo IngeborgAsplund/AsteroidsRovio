@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7456318295179756428}
   m_Layer: 0
   m_Name: Ship
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   radius: 5
+  maxTimerValue: 0.1
   bullet: {fileID: 3858768775677836594, guid: fcbf3e631d9551445b4d54c3f3acc9ef, type: 3}
   bulletSpawnPoint: {fileID: 7330823967496906215}
   turnspeed: 0.5

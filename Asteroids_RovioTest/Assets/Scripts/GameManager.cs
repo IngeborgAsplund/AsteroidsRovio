@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public void EndGame() 
     {
         gameOver = true;
+        Board.ClearGameBoard();
         GameGUI.ShowGameOver();
     }
 }

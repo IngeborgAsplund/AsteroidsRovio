@@ -5,7 +5,9 @@ using UnityEngine;
 public class Asteroid : GamePlayActor
 {
     [SerializeField]
-    private int score;
+    private int baseScoreValue = 100;
+    [SerializeField]
+    private int score = 0;
     private Rigidbody2D rigidbody;
     private float size;
     [SerializeField]
@@ -17,14 +19,30 @@ public class Asteroid : GamePlayActor
     {
         rigidbody = GetComponent<Rigidbody2D>();
     }
+    private void SetScoreBySize() 
+    {
+        if (size > 1.2f) 
+        {
+            score = baseScoreValue/3;
+        }
+        if(size> 0.75 && size <= 1.2) 
+        {
+            score = baseScoreValue/2;
+        }
+        if (size <= 0.75) 
+        {
+            score = baseScoreValue;
+        }
+    }
     private void Start()
     {
         size = Random.Range(minSize, maxSize);
+        SetScoreBySize();
         transform.localScale = Vector3.one*size;
     }
     private void Update()
     {
-        GameManager.Instance.Board.ObjectCrossedBorder(this.gameObject);
+        GameManager.Instance.Board.ObjectCrossedBorder(this.gameObject);     
     }
     public void SetStartSpeedandRotation(float rotationspeed, float direction) 
     {       

@@ -8,6 +8,7 @@ public class Projectile : GamePlayActor
     private float lifeTime;
     [SerializeField]
     private Rigidbody2D rigidBody;
+    
 
     private void Awake()
     {
@@ -15,7 +16,12 @@ public class Projectile : GamePlayActor
     }
     private void Update()
     {
+        if (GameManager.Instance.GameOver) 
+        {
+            Destruction();
+        }
         LifeTimeCount();
+        InvulnerabilityTimerCountDown();
         GameManager.Instance.Board.ObjectCrossedBorder(this.gameObject);
     }
     public void Project (Vector2 direction) 
@@ -32,5 +38,13 @@ public class Projectile : GamePlayActor
         { 
             Destruction(); 
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (timeOfInvulnerability <= 0) 
+        {
+            Destruction();
+        }
+       
     }
 }
