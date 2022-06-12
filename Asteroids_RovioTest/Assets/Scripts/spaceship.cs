@@ -26,39 +26,40 @@ public class spaceship : GamePlayActor
     }
     private void FixedUpdate()
     {
-        if (thrusting) 
+        if (Controls.Thrusting()) 
         {
             Move();            
         }
-        if (turnDirection != 0.0f) 
+        if (DetermineTurnDirection() != 0.0f) 
         {
             Rotate();
-        }
+        }      
         
+    }
+    private float DetermineTurnDirection() 
+    {
+        if (Controls.TurnRight()) 
+        {
+            turnDirection = -1.0f;
+            return turnDirection;
+        }
+        if (Controls.TurnLeft()) 
+        {
+            turnDirection = 1.0f;
+            return turnDirection;
+        }
+        turnDirection = 0.0f;
+        return 0.0f;
     }
     private void TakeInput() 
     {
-        if (!GameManager.Instance.GameOver) 
-        {
-            thrusting = Input.GetKey(KeyCode.UpArrow);
-
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                turnDirection = 1.0f;
-            }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                turnDirection = -1.0f;
-            }
-            if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
-            {
-                turnDirection = 0.0f;
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
+        if (!GameManager.Instance.GameOver)
+        {                      
+            if (Controls.Firing())
             {
                 Fire();
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Controls.Teleporting())
             {
                 Teleport();
             }
@@ -68,7 +69,7 @@ public class spaceship : GamePlayActor
     private void Fire() 
     {
         timeOfInvulnerability = maxTimerValue;
-        Projectile newProjectile = Instantiate(bullet, bulletSpawnPoint.transform.position,bulletSpawnPoint.transform.rotation);
+        Projectile newProjectile = Instantiate(bullet, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
         newProjectile.Project(this.transform.up);
     }
     private void Move() 
