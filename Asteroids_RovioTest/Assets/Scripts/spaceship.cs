@@ -15,7 +15,16 @@ public class Spaceship : GamePlayActor
 
     private void Awake()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        if(GameManager.Instance.Board.Player == null) 
+        {
+            GameManager.Instance.Board.Player = this;
+            rigidBody = GetComponent<Rigidbody2D>();
+        }
+        else
+        {
+            Destruction();
+        }
+        
     }
     private void Update()
     {

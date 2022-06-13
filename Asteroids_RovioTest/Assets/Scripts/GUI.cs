@@ -12,10 +12,16 @@ public class GUI : MonoBehaviour
     GameObject gameoverText;
     [SerializeField]
     GameObject startButton;
+    [SerializeField]
+    GameObject exitButton;
     // Start is called before the first frame update
     void Start()
     {
         GameManager.Instance.GameGUI = this;
+    }
+    public void Exitapplication() 
+    {
+        Application.Quit();
     }
     public void CallStart() 
     {
@@ -34,11 +40,13 @@ public class GUI : MonoBehaviour
     {
         gameoverText.SetActive(true);
         startButton.SetActive(true);
+        exitButton.SetActive(true);
     }
     public void HideGameOver() 
     {
         gameoverText.SetActive(false);
         startButton.SetActive(false);
+        exitButton.SetActive(false);
     }
 
 }

@@ -6,6 +6,7 @@ public class GameBoard : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
+    private Spaceship playerPrefab;
     private Spaceship player;
     [SerializeField]
     int numberOfAsteroids = 10;
@@ -58,6 +59,11 @@ public class GameBoard : MonoBehaviour
     {
         get { return asteroidsInGame; }
     }
+    public Spaceship Player 
+    {
+        get { return player; }
+        set { player = value; }
+    }
     private void Start()
     {
         GameManager.Instance.Board = this;
@@ -79,7 +85,10 @@ public class GameBoard : MonoBehaviour
     public void DecreaseALife() 
     {
         currentLives--;
-        Destroy(GameObject.FindGameObjectWithTag("Player"));
+        if (player != null) 
+        {
+            player.Destruction();
+        }        
         GameManager.Instance.GameGUI.UpdateLivesLabel(currentLives);
         if (currentLives > 0) 
         {           
@@ -94,7 +103,7 @@ public class GameBoard : MonoBehaviour
       
     public void SpawnPlayer() 
     {
-        Instantiate(player.gameObject, spawnPoint.transform.position,Quaternion.identity);
+        Instantiate(playerPrefab.gameObject, spawnPoint.transform.position,Quaternion.identity);
         GameManager.Instance.GameGUI.UpdateLivesLabel(currentLives);
     }
 
@@ -140,7 +149,7 @@ public class GameBoard : MonoBehaviour
     private Vector3 SelectPosition() 
     {
         Vector3 position = new Vector3(Random.Range(leftBorder, rightBorder), Random.Range(lowerEdge, upperEdge), spawnPoint.transform.position.z);
-        if (player.TransformWithinradius(position)) 
+        if (playerPrefab.TransformWithinradius(position)) 
         {
             position = new Vector3(Random.Range(leftBorder, rightBorder), Random.Range(lowerEdge, upperEdge), spawnPoint.transform.position.z);
             Debug.Log(position);
