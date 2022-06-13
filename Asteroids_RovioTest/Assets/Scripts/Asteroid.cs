@@ -74,8 +74,9 @@ public class Asteroid : GamePlayActor
     }
     private void Split() 
     {
-        Vector2 position = transform.position;
-        position += Random.insideUnitCircle * radius;
+        Vector3 position = transform.position;
+        position += Random.insideUnitSphere * radius;
+        position.z = this.transform.position.z;
         Asteroid splitOff = Instantiate(this, position, transform.rotation);
         splitOff.SetStartSpeedandRotation(Random.Range(10,40), Random.Range(-1, 1));
         GameManager.Instance.Board.AsteroidsInGame.Add(splitOff);

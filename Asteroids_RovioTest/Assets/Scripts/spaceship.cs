@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class spaceship : GamePlayActor
+public class Spaceship : GamePlayActor
 {
     [SerializeField]
     private Projectile bullet;
@@ -11,7 +11,6 @@ public class spaceship : GamePlayActor
     [SerializeField]
     private float turnspeed;
     private Rigidbody2D rigidBody;
-    private bool thrusting;
     private float turnDirection;
 
     private void Awake()
@@ -87,11 +86,12 @@ public class spaceship : GamePlayActor
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (timeOfInvulnerability <= 0) 
+        if (collision.gameObject.tag=="Bullet"&&timeOfInvulnerability > 0) 
         {
-            GameManager.Instance.Board.DecreaseALife();
-            timeOfInvulnerability = maxTimerValue;
+            return;
         }
+        GameManager.Instance.Board.DecreaseALife();
+        timeOfInvulnerability = maxTimerValue;
     }
 
 }

@@ -6,7 +6,7 @@ public class GameBoard : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    private spaceship player;
+    private Spaceship player;
     [SerializeField]
     int numberOfAsteroids = 10;
     [SerializeField]
@@ -15,20 +15,45 @@ public class GameBoard : MonoBehaviour
     [SerializeField]
     private Transform spawnPoint;
     [SerializeField]
-    private float timerValue;
+    private float timerValue = 0.2f;
     [SerializeField]
-    private float rightBorder;
+    private float rightBorder = 9.21f;
     [SerializeField]
-    private float leftBorder;
+    private float leftBorder = -9.19f;
     [SerializeField]
-    private float upperEdge;
+    private float upperEdge = 5.11f;
     [SerializeField]
-    private float lowerEdge;
+    private float lowerEdge = -5.09f;
     [SerializeField]
-    int Maxlives = 5;
+    int maxlives = 5;
     int currentLives = 0;
     private float timer = .1f;
     
+    public float RightBorder 
+    {
+        get { return rightBorder; }
+    }
+    public float LeftBorder 
+    {
+        get { return leftBorder; }
+    }
+    public float UpperEdge 
+    {
+        get { return upperEdge; }
+    }
+    public float LowerEdge 
+    {
+        get { return lowerEdge; }
+    }
+    public Transform SpawnPoint 
+    {
+        get { return spawnPoint; }
+        set { spawnPoint = value; }
+    }
+    public float Timer 
+    {
+        set { timer = value; }
+    }
     public List<Asteroid> AsteroidsInGame 
     {
         get { return asteroidsInGame; }
@@ -48,7 +73,7 @@ public class GameBoard : MonoBehaviour
     }
     public void SetStartingLives() 
     {
-        currentLives = Maxlives;
+        currentLives = maxlives;
     }
 
     public void DecreaseALife() 

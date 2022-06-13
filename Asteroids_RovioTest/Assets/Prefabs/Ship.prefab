@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7054343917558336563}
   - component: {fileID: 6586662089714888072}
-  - component: {fileID: 3551322217957304243}
   - component: {fileID: 5347350996394924459}
   - component: {fileID: 7456318295179756428}
+  - component: {fileID: 5793798503351654913}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Player
@@ -86,24 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3551322217957304243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2950513074430293999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c49e9df2883a603448faae752483f7ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  radius: 5
-  maxTimerValue: 0.1
-  bullet: {fileID: 3858768775677836594, guid: fcbf3e631d9551445b4d54c3f3acc9ef, type: 3}
-  bulletSpawnPoint: {fileID: 7330823967496906215}
-  turnspeed: 0.5
 --- !u!61 &5347350996394924459
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,6 +133,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5793798503351654913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2950513074430293999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49e9df2883a603448faae752483f7ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  radius: 2
+  maxTimerValue: 1
+  bullet: {fileID: 3858768775677836594, guid: fcbf3e631d9551445b4d54c3f3acc9ef, type: 3}
+  bulletSpawnPoint: {fileID: 7330823967496906215}
+  turnspeed: 0.5
 --- !u!1 &4145730244386932701
 GameObject:
   m_ObjectHideFlags: 0
