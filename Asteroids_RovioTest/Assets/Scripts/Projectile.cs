@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : GamePlayActor
 {
     [SerializeField]
-    private float lifeTime;
+    private float lifeTime = 1f;
     [SerializeField]
     private Rigidbody2D rigidBody;
     

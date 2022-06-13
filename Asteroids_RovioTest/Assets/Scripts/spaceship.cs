@@ -9,9 +9,9 @@ public class Spaceship : GamePlayActor
     [SerializeField]
     private Transform bulletSpawnPoint;
     [SerializeField]
-    private float turnspeed;
+    private float turnspeed = 0.5f;
     private Rigidbody2D rigidBody;
-    private float turnDirection;
+    private float turnDirection = 0.0f;
 
     private void Awake()
     {

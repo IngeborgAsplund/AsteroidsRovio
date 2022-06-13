@@ -9,7 +9,7 @@ public class GamePlayActor : MonoBehaviour
     [SerializeField]
     protected float radius = 1;
     [SerializeField]
-    protected float maxTimerValue;
+    protected float maxTimerValue = 0.5f;
     protected float timeOfInvulnerability = 0.5f;
     private void Awake()
     {

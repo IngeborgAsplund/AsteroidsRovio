@@ -4,10 +4,10 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class SpaceShipTests
+public class SpaceshipTests
 {  
     [UnityTest]
-    public IEnumerator NoMoreThanOneSpaceShipInScene()
+    public IEnumerator NoMoreThanOneSpaceshipInScene()
     {
         GameManager gameManager = new GameObject().AddComponent<GameManager>();
         GameBoard board = new GameObject().AddComponent<GameBoard>();    
